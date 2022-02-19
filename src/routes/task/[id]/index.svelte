@@ -1,4 +1,10 @@
 <script lang="ts">
+	import DurationUnitFormat from 'intl-unofficial-duration-unit-format';
+	const duration = new DurationUnitFormat(undefined, {
+		style: DurationUnitFormat.styles.LONG,
+		format: '{days} {hours} {minutes} {seconds}'
+	});
+	import { add } from '$lib/utils';
 	import { page } from '$app/stores';
 	import { tasks, selectedTask, selectedActivity, commentModalOpen } from '$lib/stores/app';
 	import { endActivity, startActivity, type Activity } from '$lib/utils/tasks';
@@ -39,6 +45,11 @@
 		<div>
 			<Headline>{task.label}</Headline>
 			<Subhead>ID: {task.id}</Subhead>
+			<Label
+				>Total Time Spent: {duration.format(
+					task.activities.map((act) => (act.done ? act.end - act.start : 0)).reduce(add, 0) / 1000
+				)}</Label
+			>
 		</div>
 		<Button round filled on:click={toggle}
 			><svelte:component this={running ? IconPause : IconPlay} /></Button
@@ -70,6 +81,10 @@
 							  })
 							: 'Ongoing'}</H3
 					>
+				</span>
+				<span>
+					<Label>Duration</Label>
+					<H3>{act.end ? duration.format((act.end - act.start) / 1000) : 'Ongoing'}</H3>
 				</span>
 				<span>
 					<Label>Done</Label>
