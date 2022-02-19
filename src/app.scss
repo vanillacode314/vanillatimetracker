@@ -1,0 +1,15 @@
+:root {
+	--border-radius: 1rem;
+	--background-color: #efefef;
+	--foreground-color: #222;
+	--accent-color: pink;
+	--secondary-color: #{darken(pink, 10%)};
+}
+
+body,
+html {
+	background-color: var(--background-color);
+	color: var(--foreground-color);
+	font-family: 'Roboto';
+	height: 100%;
+}
