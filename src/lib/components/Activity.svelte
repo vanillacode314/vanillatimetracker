@@ -8,8 +8,8 @@
 	import {
 		selectedActivity,
 		commentModalOpen,
-		tasks,
-		removeActivityModalOpen
+		removeActivityModalOpen,
+		now
 	} from '$lib/stores/app';
 
 	/// Components
@@ -53,12 +53,19 @@
 						timeStyle: 'medium',
 						dateStyle: 'long'
 				  })
-				: 'Ongoing'}</H3
+				: new Date($now).toLocaleString(undefined, {
+						timeStyle: 'medium',
+						dateStyle: 'long'
+				  })}</H3
 		>
 	</span>
 	<span>
 		<Label>Duration</Label>
-		<H3>{act.end ? duration.format((act.end - act.start) / 1000) : 'Ongoing'}</H3>
+		<H3
+			>{act.end
+				? duration.format((act.end - act.start) / 1000)
+				: duration.format(Math.max($now - act.start, 0) / 1000)}</H3
+		>
 	</span>
 	<span>
 		<Label>Done</Label>

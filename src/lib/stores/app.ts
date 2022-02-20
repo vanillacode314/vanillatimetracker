@@ -10,3 +10,7 @@ export const addModalOpen = writable<boolean>(false);
 export const commentModalOpen = writable<boolean>(false);
 export const removeActivityModalOpen = writable<boolean>(false);
 export const removeTaskModalOpen = writable<boolean>(false);
+
+/// Tick
+export const now = writable<number>(Date.now());
+setInterval(() => now.update((v) => v + 1000), 1000);
