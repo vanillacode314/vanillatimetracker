@@ -11,11 +11,11 @@
 
 	/// Components
 	import { Button, Card, Headline, Subhead, Label } from 'attractions';
-	import IconTrash from '~icons/mdi/trash';
 	import IconPlay from '~icons/mdi/play';
 	import IconPause from '~icons/mdi/pause';
 
 	/// State
+	import { selectedTask, editModalOpen } from '$lib/stores/app';
 	export let task: Task;
 	$: running = task.activities.some((act) => act.done === false);
 
@@ -36,6 +36,11 @@
 	function exportTask() {
 		exportToJsonFile(task, `${task.id}-${task.label}`.replaceAll(' ', '-'));
 	}
+
+	function edit() {
+		$selectedTask = task;
+		$editModalOpen = true;
+	}
 </script>
 
 <Card class="main--card">
@@ -55,7 +60,8 @@
 			><svelte:component this={running ? IconPause : IconPlay} /></Button
 		>
 		<span class="end">
-			<Button round danger on:click={remove}>Remove</Button>
+			<Button on:click={edit}>Edit</Button>
+			<Button danger on:click={remove}>Remove</Button>
 			<Button on:click={exportTask}>Export</Button>
 		</span>
 	</div>

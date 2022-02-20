@@ -1,21 +1,29 @@
 <script lang="ts">
-	import type { Activity } from '$lib/utils/tasks';
 	import DurationUnitFormat from 'intl-unofficial-duration-unit-format';
 	const duration = new DurationUnitFormat(undefined, {
 		style: DurationUnitFormat.styles.LONG,
 		format: '{days} {hours} {minutes} {seconds}'
 	});
+	import type { Activity } from '$lib/utils/tasks';
+	import { selectedActivity, commentModalOpen, tasks } from '$lib/stores/app';
 
-	import { selectedActivity, commentModalOpen } from '$lib/stores/app';
-
+	/// Components
 	import { Card, Label, H3, Button } from 'attractions';
-
 	import IconPencil from '~icons/mdi/Pencil';
+	import IconTrash from '~icons/mdi/trash';
+	import { page } from '$app/stores';
 
+	/// State
 	export let act: Activity;
-	function comment(activity: Activity) {
-		$selectedActivity = activity;
+	function comment() {
+		$selectedActivity = act;
 		$commentModalOpen = true;
+	}
+
+	function remove() {
+		let task = $tasks.find((t) => t.id === Number($page.params.id));
+		task.activities = task.activities.filter((a) => a !== act);
+		$tasks = $tasks;
 	}
 </script>
 
@@ -56,12 +64,22 @@
 		<Label>Comment</Label>
 		<H3>{act.comment || 'None'}</H3>
 	</span>
-	<Button outline class="edit--icon" on:click={() => comment(act)}>
-		<IconPencil /> Comment
-	</Button>
+	<span class="actions">
+		<Button outline class="edit--icon" on:click={comment}>
+			<IconPencil /> Comment
+		</Button>
+		<Button round outline danger class="edit--icon" on:click={remove}>
+			<IconTrash />
+		</Button>
+	</span>
 </Card>
 
 <style lang="scss">
+	.actions {
+		justify-content: end;
+		display: flex;
+		gap: 1rem;
+	}
 	:global(.act) {
 		display: grid;
 		grid-template-rows: auto auto auto;

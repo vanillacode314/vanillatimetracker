@@ -1,8 +1,7 @@
 <script lang="ts">
 	import { Label, H3, Card, Button } from 'attractions';
 	import { goto } from '$app/navigation';
-	import type { Task } from '$lib/utils/tasks';
-	import { selectedTask, editModalOpen } from '$lib/stores/app';
+	import { endActivity, startActivity, type Task } from '$lib/utils/tasks';
 
 	// Icons
 	import IconPlay from '~icons/mdi/play';
@@ -12,21 +11,21 @@
 	import IconChevronRight from '~icons/mdi/chevron-right';
 	export let task: Task;
 	// $: running = task.activities.some((act) => act.done === false);
-	let running = false;
-
 	$: last_run = task.activities.length ? task.activities.at(-1).start : null;
+	$: running = task.activities.some((act) => act.done === false);
+
+	/// Methods
+
+	function toggle() {
+		if (running) {
+			endActivity(task.activities.find((act) => act.done === false));
+		} else {
+			startActivity(task);
+		}
+	}
 
 	function gotoTask() {
 		goto(`/task/${task.id}`);
-	}
-
-	function toggle() {
-		running = !running;
-	}
-
-	function edit() {
-		$selectedTask = task;
-		$editModalOpen = true;
 	}
 </script>
 

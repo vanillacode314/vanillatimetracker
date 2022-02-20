@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="198.09001mm"
+   height="198.09001mm"
+   viewBox="0 0 198.09001 198.09001"
+   version="1.1"
+   id="svg10234"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs10231">
+    <style
+       id="style33562">.cls-1{fill:#1e0f00;}</style>
+    <filter
+       style="color-interpolation-filters:sRGB"
+       id="filter33796"
+       x="-0.027000001"
+       y="-0.027000001"
+       width="1.054"
+       height="1.054">
+      <feGaussianBlur
+         stdDeviation="2.1143383"
+         id="feGaussianBlur33798" />
+    </filter>
+  </defs>
+  <g
+     id="layer1"
+     style="display:inline;mix-blend-mode:normal;filter:url(#filter33796)"
+     transform="translate(-5.9549969,-49.454997)">
+    <g
+       id="_1"
+       data-name="1"
+       transform="matrix(3.9154413,0,0,3.9154413,11.029409,54.529409)"
+       style="fill:#b3b3b3">
+      <path
+         class="cls-1"
+         d="M 24,48 A 24,24 0 1 1 48,24 24,24 0 0 1 24,48 Z M 24,2 A 22,22 0 1 0 46,24 22,22 0 0 0 24,2 Z"
+         id="path33568"
+         style="fill:#b3b3b3" />
+      <path
+         class="cls-1"
+         d="m 24,28 a 4,4 0 1 1 4,-4 4,4 0 0 1 -4,4 z m 0,-6 a 2,2 0 1 0 2,2 2,2 0 0 0 -2,-2 z"
+         id="path33570"
+         style="fill:#b3b3b3" />
+      <rect
+         class="cls-1"
+         x="4"
+         y="23"
+         width="4"
+         height="2"
+         id="rect33572"
+         style="fill:#b3b3b3" />
+      <rect
+         class="cls-1"
+         x="40"
+         y="23"
+         width="4"
+         height="2"
+         id="rect33574"
+         style="fill:#b3b3b3" />
+      <rect
+         class="cls-1"
+         x="23"
+         y="4"
+         width="2"
+         height="4"
+         id="rect33576"
+         style="fill:#b3b3b3" />
+      <rect
+         class="cls-1"
+         x="23"
+         y="40"
+         width="2"
+         height="4"
+         id="rect33578"
+         style="fill:#b3b3b3" />
+      <rect
+         class="cls-1"
+         x="6.4099998"
+         y="32"
+         width="4"
+         height="2"
+         transform="rotate(-29.99,8.4057556,33.000825)"
+         id="rect33580"
+         style="fill:#b3b3b3" />
+      <rect
+         class="cls-1"
+         x="37.59"
+         y="14"
+         width="4"
+         height="2"
+         transform="rotate(-29.99,39.593558,15.006689)"
+         id="rect33582"
+         style="fill:#b3b3b3" />
+      <rect
+         class="cls-1"
+         x="14"
+         y="6.4099998"
+         width="2"
+         height="4"
+         transform="rotate(-30,15.003799,8.4202559)"
+         id="rect33584"
+         style="fill:#b3b3b3" />
+      <rect
+         class="cls-1"
+         x="32"
+         y="37.59"
+         width="2"
+         height="4"
+         transform="rotate(-30,33.013014,39.58581)"
+         id="rect33586"
+         style="fill:#b3b3b3" />
+      <rect
+         class="cls-1"
+         x="13"
+         y="38.59"
+         width="4"
+         height="2"
+         transform="rotate(-60.01,14.996251,39.591146)"
+         id="rect33588"
+         style="fill:#b3b3b3" />
+      <rect
+         class="cls-1"
+         x="21.620001"
+         y="13.7"
+         width="15.48"
+         height="2"
+         transform="rotate(-60.01,29.366251,14.706591)"
+         id="rect33590"
+         style="fill:#b3b3b3" />
+      <rect
+         class="cls-1"
+         x="7.4099998"
+         y="13"
+         width="2"
+         height="4"
+         transform="rotate(-60,8.4098555,14.993703)"
+         id="rect33592"
+         style="fill:#b3b3b3" />
+      <rect
+         class="cls-1"
+         x="38.59"
+         y="31"
+         width="2"
+         height="4"
+         transform="rotate(-60,39.58177,33.002363)"
+         id="rect33594"
+         style="fill:#b3b3b3" />
+      <rect
+         class="cls-1"
+         x="29.08"
+         y="23.49"
+         width="2"
+         height="8.0500002"
+         transform="rotate(-60,30.086471,27.508703)"
+         id="rect33596"
+         style="fill:#b3b3b3" />
+    </g>
+  </g>
+  <g
+     id="layer2"
+     style="display:inline;opacity:0.8"
+     transform="translate(-5.9549969,-49.454997)">
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:105.833px;line-height:1.25;font-family:'UbuntuMono Nerd Font';-inkscape-font-specification:'UbuntuMono Nerd Font';display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       x="53.512245"
+       y="181.30823"
+       id="text11120"><tspan
+         id="tspan11118"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:105.833px;font-family:'UbuntuMono Nerd Font';-inkscape-font-specification:'UbuntuMono Nerd Font';stroke-width:0.264583"
+         x="53.512245"
+         y="181.30823">VC</tspan></text>
+  </g>
+</svg>

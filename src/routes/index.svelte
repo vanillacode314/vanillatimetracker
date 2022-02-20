@@ -3,5 +3,24 @@
 	import Toolbar from '$lib/layouts/Toolbar.svelte';
 </script>
 
-<Toolbar />
-<Tasks />
+<div class="container">
+	<div class="tasks">
+		<Tasks />
+	</div>
+	<div class="toolbar">
+		<Toolbar />
+	</div>
+</div>
+
+<style lang="scss">
+	.container {
+		display: grid;
+		height: 100%;
+		grid-template-rows: 1fr auto;
+		gap: 1rem;
+	}
+	.tasks {
+		padding: 0.5rem;
+		overflow-y: auto;
+	}
+</style>
