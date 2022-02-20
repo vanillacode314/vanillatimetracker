@@ -1,0 +1,15 @@
+{
+	"short_name": "vanillatimetracker",
+	"name": "Vanilla Time Tracker",
+	"start_url": "/",
+	"icons": [
+		{
+			"src": "favicon.png",
+			"type": "image/png",
+			"sizes": "512x512"
+		}
+	],
+	"display": "standalone",
+	"scope": "/",
+	"description": "Time tracker for freelancers."
+}
