@@ -5,7 +5,12 @@
 		format: '{days} {hours} {minutes} {seconds}'
 	});
 	import type { Activity } from '$lib/utils/tasks';
-	import { selectedActivity, commentModalOpen, tasks } from '$lib/stores/app';
+	import {
+		selectedActivity,
+		commentModalOpen,
+		tasks,
+		removeActivityModalOpen
+	} from '$lib/stores/app';
 
 	/// Components
 	import { Card, Label, H3, Button } from 'attractions';
@@ -21,9 +26,8 @@
 	}
 
 	function remove() {
-		let task = $tasks.find((t) => t.id === Number($page.params.id));
-		task.activities = task.activities.filter((a) => a !== act);
-		$tasks = $tasks;
+		$selectedActivity = act;
+		$removeActivityModalOpen = true;
 	}
 </script>
 

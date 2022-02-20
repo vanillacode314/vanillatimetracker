@@ -7,7 +7,15 @@
 	import AddModal from '$lib/components/AddModal.svelte';
 	import CommentModal from '$lib/components/CommentModal.svelte';
 
-	import { addModalOpen, commentModalOpen, editModalOpen } from '$lib/stores/app';
+	import {
+		addModalOpen,
+		commentModalOpen,
+		editModalOpen,
+		removeTaskModalOpen,
+		removeActivityModalOpen
+	} from '$lib/stores/app';
+	import DeleteTaskModal from '$lib/components/DeleteTaskModal.svelte';
+	import DeleteActivityModal from '$lib/components/DeleteActivityModal.svelte';
 </script>
 
 <svelte:head>
@@ -20,6 +28,8 @@
 <EditModal bind:open={$editModalOpen} />
 <CommentModal bind:open={$commentModalOpen} />
 <AddModal bind:open={$addModalOpen} />
+<DeleteActivityModal bind:open={$removeActivityModalOpen} />
+<DeleteTaskModal bind:open={$removeTaskModalOpen} />
 
 <style lang="scss">
 	main {

@@ -8,3 +8,5 @@ export const selectedActivity = writable<Activity>(null);
 export const editModalOpen = writable<boolean>(false);
 export const addModalOpen = writable<boolean>(false);
 export const commentModalOpen = writable<boolean>(false);
+export const removeActivityModalOpen = writable<boolean>(false);
+export const removeTaskModalOpen = writable<boolean>(false);

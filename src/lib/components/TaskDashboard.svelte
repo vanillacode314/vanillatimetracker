@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { goto } from '$app/navigation';
 	import DurationUnitFormat from 'intl-unofficial-duration-unit-format';
 	const duration = new DurationUnitFormat(undefined, {
 		style: DurationUnitFormat.styles.LONG,
@@ -7,7 +6,7 @@
 	});
 
 	import { add, exportToJsonFile } from '$lib/utils';
-	import { endActivity, removeTask, startActivity, type Task } from '$lib/utils/tasks';
+	import { endActivity, startActivity, type Task } from '$lib/utils/tasks';
 
 	/// Components
 	import { Button, Card, Headline, Subhead, Label } from 'attractions';
@@ -15,14 +14,14 @@
 	import IconPause from '~icons/mdi/pause';
 
 	/// State
-	import { selectedTask, editModalOpen } from '$lib/stores/app';
+	import { selectedTask, editModalOpen, removeTaskModalOpen } from '$lib/stores/app';
 	export let task: Task;
 	$: running = task.activities.some((act) => act.done === false);
 
 	/// Methods
 	async function remove() {
-		await goto('/');
-		removeTask(task.id);
+		$selectedTask = task;
+		$removeTaskModalOpen = true;
 	}
 
 	function toggle() {
