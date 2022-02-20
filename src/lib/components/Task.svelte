@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { Label, H3, Card, Button } from 'attractions';
 	import { goto } from '$app/navigation';
-	import { removeTask } from '$lib/utils/tasks';
 	import type { Task } from '$lib/utils/tasks';
 	import { selectedTask, editModalOpen } from '$lib/stores/app';
 
@@ -16,9 +15,6 @@
 	let running = false;
 
 	$: last_run = task.activities.length ? task.activities.at(-1).start : null;
-	function remove() {
-		removeTask(task.id);
-	}
 
 	function gotoTask() {
 		goto(`/task/${task.id}`);

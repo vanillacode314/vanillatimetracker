@@ -19,7 +19,7 @@
 	}
 </script>
 
-<Card outline class="act">
+<Card class="act">
 	<span>
 		<Label>ID</Label>
 		<H3>{act.id}</H3>

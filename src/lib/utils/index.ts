@@ -2,11 +2,11 @@ export function add(acc, n) {
 	return acc + n;
 }
 
-export function exportToJsonFile(jsonData) {
+export function exportToJsonFile(jsonData: any, name: string = 'data.json') {
 	let dataStr = JSON.stringify(jsonData);
 	let dataUri = 'data:application/json;charset=utf-8,' + encodeURIComponent(dataStr);
 
-	let exportFileDefaultName = 'data.json';
+	let exportFileDefaultName = name;
 
 	let linkElement = document.createElement('a');
 	linkElement.setAttribute('href', dataUri);
