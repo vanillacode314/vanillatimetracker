@@ -27,16 +27,23 @@ export function getId(ids: number[]): number {
 	return id;
 }
 
-export function createTask(label: string, description: string = '') {
+export function createTask({
+	label = '',
+	description = '',
+	paid = false,
+	rate = 0,
+	currency = 'USD'
+} = {}) {
+	if (!label) return;
 	tasks.update((val) => {
 		const id = getId(val.map((task) => task.id));
 		const task = {
 			id,
 			label,
 			description,
-			paid: false,
-			rate: 0,
-			currency: 'USD',
+			paid,
+			rate,
+			currency,
 			activities: []
 		};
 		val.push(task);
