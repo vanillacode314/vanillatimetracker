@@ -5,18 +5,28 @@
 		format: '{days} {hours} {minutes} {seconds}'
 	});
 
-	import { add, exportToJsonFile } from '$lib/utils';
+	import { add, exportToJsonFile, round } from '$lib/utils';
 	import { endActivity, startActivity, type Task } from '$lib/utils/tasks';
 
 	/// Components
-	import { Button, Card, Headline, Subhead, Label } from 'attractions';
+	import { Switch, Button, Card, Headline, Subhead, Label } from 'attractions';
 	import IconPlay from '~icons/mdi/play';
 	import IconPause from '~icons/mdi/pause';
 
 	/// State
-	import { selectedTask, editModalOpen, removeTaskModalOpen } from '$lib/stores/app';
+	import { tasks, selectedTask, editModalOpen, removeTaskModalOpen } from '$lib/stores/app';
+	import { tick } from 'svelte';
 	export let task: Task;
 	$: running = task.activities.some((act) => act.done === false);
+	$: total_time_spent = duration.format(
+		task.activities.map((act) => (act.done ? act.end - act.start : 0)).reduce(add, 0) / 1000
+	);
+	$: total_earnings = round(
+		((task.rate / (60 * 60)) *
+			task.activities.map((act) => (act.done ? act.end - act.start : 0)).reduce(add, 0)) /
+			1000,
+		2
+	);
 
 	/// Methods
 	async function remove() {
@@ -40,19 +50,33 @@
 		$selectedTask = task;
 		$editModalOpen = true;
 	}
+
+	function onPaidChanged() {
+		tick().then(() => ($tasks = $tasks));
+		if (task.paid) {
+			alert('now you can set a rate in edit menu.');
+		}
+	}
 </script>
 
 <Card class="main--card">
+	<Switch class="paid--switch" bind:value={task.paid} on:change={onPaidChanged}>Paid</Switch>
 	<div>
 		<Headline>{task.label}</Headline>
 		<Subhead>ID: {task.id}</Subhead>
 		<Label
 			>Total Time Spent: <span class="neutral">
-				{duration.format(
-					task.activities.map((act) => (act.done ? act.end - act.start : 0)).reduce(add, 0) / 1000
-				)}
+				{total_time_spent}
 			</span></Label
 		>
+		{#if task.paid}
+			<Label
+				>Total Earnings: <span class="neutral">
+					{task.currency}
+					{total_earnings}
+				</span></Label
+			>
+		{/if}
 	</div>
 	<div class="task--actions">
 		<Button round filled on:click={toggle}
@@ -82,7 +106,6 @@
 		justify-content: space-between;
 		width: 100%;
 	}
-
 	.end {
 		display: flex;
 		gap: 1rem;

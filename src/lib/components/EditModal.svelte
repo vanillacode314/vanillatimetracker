@@ -5,17 +5,23 @@
 	let description: string;
 	let label: string;
 	let id: number;
+	let rate: number;
+	let currency: string;
 
 	$: if (open) loadData();
 
 	function loadData() {
 		label = $selectedTask?.label;
+		rate = $selectedTask?.rate;
+		currency = $selectedTask?.currency;
 		description = $selectedTask?.description;
 		id = $selectedTask?.id;
 	}
 
 	function update() {
 		$selectedTask.label = label;
+		$selectedTask.rate = rate || 0;
+		$selectedTask.currency = currency || 'USD';
 		$selectedTask.description = description;
 		$selectedTask = $selectedTask;
 		$tasks = $tasks;
@@ -31,6 +37,14 @@
 		<FormField name="Label" required>
 			<TextField bind:value={label} />
 		</FormField>
+		{#if $selectedTask?.paid}
+			<FormField name="Hourly Rate" optional>
+				<TextField type="number" bind:value={rate} />
+			</FormField>
+			<FormField name="Currency" required>
+				<TextField bind:value={currency} />
+			</FormField>
+		{/if}
 		<FormField name="Description" optional>
 			<TextField multiline bind:value={description} />
 		</FormField>

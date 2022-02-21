@@ -7,11 +7,11 @@
 }
 
 /* Preferred box-sizing value */
-*,
-*::before,
-*::after {
-	box-sizing: border-box;
-}
+/* *, */
+/* *::before, */
+/* *::after { */
+/* 	box-sizing: border-box; */
+/* } */
 
 /*
   Remove list styles (bullets/numbers)

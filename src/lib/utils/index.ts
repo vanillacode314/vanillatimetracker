@@ -13,3 +13,7 @@ export function exportToJsonFile(jsonData: any, name: string = 'data.json') {
 	linkElement.setAttribute('download', exportFileDefaultName);
 	linkElement.click();
 }
+
+export function round(n: number, precision: number) {
+	return Math.round((n + Number.EPSILON) * Math.pow(10, precision)) / Math.pow(10, precision);
+}

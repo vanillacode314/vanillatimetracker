@@ -33,6 +33,7 @@
 
 <style lang="scss">
 	main {
+		box-sizing: border-box;
 		padding: 0.5rem;
 		max-width: 1080px;
 		margin-inline: auto;

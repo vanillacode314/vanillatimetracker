@@ -16,10 +16,26 @@
 	import { Card, Label, H3, Button } from 'attractions';
 	import IconPencil from '~icons/mdi/Pencil';
 	import IconTrash from '~icons/mdi/trash';
-	import { page } from '$app/stores';
 
 	/// State
 	export let act: Activity;
+	$: _duration = act.end
+		? duration.format((act.end - act.start) / 1000)
+		: duration.format(Math.max($now - act.start, 0) / 1000);
+	$: from_date = new Date(act.start).toLocaleString(undefined, {
+		timeStyle: 'medium',
+		dateStyle: 'long'
+	});
+	$: to_date = act.end
+		? new Date(act.end).toLocaleString(undefined, {
+				timeStyle: 'medium',
+				dateStyle: 'long'
+		  })
+		: new Date($now).toLocaleString(undefined, {
+				timeStyle: 'medium',
+				dateStyle: 'long'
+		  });
+
 	function comment() {
 		$selectedActivity = act;
 		$commentModalOpen = true;
@@ -38,34 +54,15 @@
 	</span>
 	<span>
 		<Label>From</Label>
-		<H3
-			>{new Date(act.start).toLocaleString(undefined, {
-				timeStyle: 'medium',
-				dateStyle: 'long'
-			})}</H3
-		>
+		<H3>{from_date}</H3>
 	</span>
 	<span>
 		<Label>To</Label>
-		<H3
-			>{act.end
-				? new Date(act.end).toLocaleString(undefined, {
-						timeStyle: 'medium',
-						dateStyle: 'long'
-				  })
-				: new Date($now).toLocaleString(undefined, {
-						timeStyle: 'medium',
-						dateStyle: 'long'
-				  })}</H3
-		>
+		<H3>{to_date}</H3>
 	</span>
 	<span>
 		<Label>Duration</Label>
-		<H3
-			>{act.end
-				? duration.format((act.end - act.start) / 1000)
-				: duration.format(Math.max($now - act.start, 0) / 1000)}</H3
-		>
+		<H3>{_duration}</H3>
 	</span>
 	<span>
 		<Label>Done</Label>

@@ -11,6 +11,9 @@ export interface Activity {
 
 export interface Task {
 	id: number;
+	paid: boolean;
+	rate: number;
+	currency: string;
 	label: string;
 	description: string;
 	activities: Activity[];
@@ -31,6 +34,9 @@ export function createTask(label: string, description: string = '') {
 			id,
 			label,
 			description,
+			paid: false,
+			rate: 0,
+			currency: 'USD',
 			activities: []
 		};
 		val.push(task);
