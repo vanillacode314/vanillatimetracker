@@ -1,38 +1,34 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 
-	import { selectedTask } from '$lib/stores/app';
+	import { selectedTask, tasks } from '$lib/stores/app';
 
-	import { removeTask } from '$lib/utils/tasks';
+	import { Button, Overlay, Card, Text } from '@kahi-ui/framework';
 
-	import { Modal, Dialog, Button } from 'attractions';
-	import IconAlert from '~icons/mdi/alert';
-
-	export let open: boolean = true;
+	let logic_state: boolean = false;
 
 	async function remove() {
 		await goto('/');
-		removeTask($selectedTask.id);
-		open = false;
+		$tasks = $tasks.filter((task) => task.id !== $selectedTask.id);
+		logic_state = false;
 	}
 </script>
 
-<Modal bind:open>
-	<Dialog title="Delete Task" closeCallback={() => (open = false)} danger>
-		<div slot="title-icon">
-			<IconAlert />
-		</div>
-		<p>Are you sure you want to delete this task?</p>
-		<span class="actions">
-			<Button danger filled on:click={remove}>Yes</Button>
-		</span>
-	</Dialog>
-</Modal>
+<Overlay.Container logic_id="task-delete-overlay" dismissible bind:logic_state>
+	<Overlay.Backdrop />
 
-<style lang="scss">
-	.actions {
-		margin-top: 1rem;
-		display: flex;
-		gap: 1rem;
-	}
-</style>
+	<Overlay.Section>
+		<Card.Container palette="auto" max_width="75">
+			<Card.Header>Create Task</Card.Header>
+
+			<Card.Section>
+				<Text>Are you sure want to delete this task and all of its activity logs?</Text>
+			</Card.Section>
+
+			<Card.Footer>
+				<Overlay.Button palette="inverse" variation="clear">Cancel</Overlay.Button>
+				<Button palette="negative" on:click={remove}>Delete</Button>
+			</Card.Footer>
+		</Card.Container>
+	</Overlay.Section>
+</Overlay.Container>

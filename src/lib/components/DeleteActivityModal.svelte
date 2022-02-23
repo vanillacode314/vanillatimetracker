@@ -3,35 +3,33 @@
 
 	import { selectedActivity, tasks } from '$lib/stores/app';
 
-	import { Modal, Dialog, Button } from 'attractions';
-	import IconAlert from '~icons/mdi/alert';
+	import { Button, Overlay, Card, Text } from '@kahi-ui/framework';
 
-	export let open: boolean = true;
+	let logic_state: boolean = false;
 
 	function remove() {
 		let task = $tasks.find((t) => t.id === Number($page.params.id));
 		task.activities = task.activities.filter((a) => a !== $selectedActivity);
 		$tasks = $tasks;
-		open = false;
+		logic_state = false;
 	}
 </script>
 
-<Modal bind:open>
-	<Dialog title="Delete Activity" closeCallback={() => (open = false)} danger>
-		<div slot="title-icon">
-			<IconAlert />
-		</div>
-		<p>Are you sure you want to delete this activity?</p>
-		<span class="actions">
-			<Button danger filled on:click={remove}>Yes</Button>
-		</span>
-	</Dialog>
-</Modal>
+<Overlay.Container logic_id="activity-delete-overlay" dismissible bind:logic_state>
+	<Overlay.Backdrop />
 
-<style lang="scss">
-	.actions {
-		margin-top: 1rem;
-		display: flex;
-		gap: 1rem;
-	}
-</style>
+	<Overlay.Section>
+		<Card.Container palette="auto" max_width="75">
+			<Card.Header>Create Task</Card.Header>
+
+			<Card.Section>
+				<Text>Are you sure want to delete this activity log?</Text>
+			</Card.Section>
+
+			<Card.Footer>
+				<Overlay.Button palette="inverse" variation="clear">Cancel</Overlay.Button>
+				<Button palette="negative" on:click={remove}>Delete</Button>
+			</Card.Footer>
+		</Card.Container>
+	</Overlay.Section>
+</Overlay.Container>

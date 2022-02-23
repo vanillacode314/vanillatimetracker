@@ -1,15 +1,17 @@
 <script lang="ts">
 	import {
-		SnackbarContainer,
+		Form,
+		TextInput,
 		Button,
-		FormField,
+		Overlay,
 		Card,
-		Modal,
-		TextField,
-		Switch
-	} from 'attractions';
+		Text,
+		Code,
+		Switch,
+		NumberInput
+	} from '@kahi-ui/framework';
 	import { createTask } from '$lib/utils/tasks';
-	export let open: boolean = false;
+	let logic_state: boolean = false;
 	let label: string = '';
 	let description: string = '';
 	let paid: boolean = false;
@@ -18,6 +20,9 @@
 
 	function update() {
 		if (!label) return;
+		if (paid) {
+			if (!rate || !currency) return;
+		}
 		createTask({
 			label,
 			description,
@@ -30,38 +35,38 @@
 		rate = 0;
 		currency = 'USD';
 		paid = false;
-		open = false;
+		logic_state = false;
 	}
 </script>
 
-<Modal bind:open>
-	<Card>
-		<FormField name="Label" required>
-			<TextField bind:value={label} />
-		</FormField>
-		<FormField name="Description" optional>
-			<TextField multiline bind:value={description} />
-		</FormField>
-		<Switch bind:value={paid}>Paid</Switch>
-		{#if paid}
-			<FormField name="Hourly Rate" required>
-				<TextField type="number" bind:value={rate} />
-			</FormField>
-			<FormField name="Currency" required>
-				<TextField bind:value={currency} />
-			</FormField>
-		{/if}
-		<div class="actions">
-			<Button filled on:click={update}>Create</Button>
-			<Button on:click={() => (open = false)}>Cancel</Button>
-		</div>
-	</Card>
-</Modal>
+<Overlay.Container logic_id="create-task-overlay" dismissible bind:logic_state>
+	<Overlay.Backdrop />
 
-<style lang="scss">
-	.actions {
-		justify-content: end;
-		display: flex;
-		gap: 1rem;
-	}
-</style>
+	<Overlay.Section>
+		<Card.Container palette="auto" max_width="75">
+			<Card.Header>Create Task</Card.Header>
+
+			<Card.Section>
+				<Form.Control>
+					<Form.Label>Label</Form.Label>
+					<TextInput bind:value={label} required />
+					<Form.Label>Description</Form.Label>
+					<TextInput is="textarea" bind:value={description} />
+					<Switch bind:state={paid}>Paid</Switch>
+					{#if paid}
+						<Form.Label>Hourly Rate</Form.Label>
+						<NumberInput bind:value={rate} />
+						<Form.Label>Currency</Form.Label>
+						<TextInput bind:value={currency} />
+					{/if}
+				</Form.Control>
+			</Card.Section>
+
+			<Card.Footer>
+				<Overlay.Button palette="inverse" variation="clear">Cancel</Overlay.Button>
+
+				<Button palette="affirmative" on:click={update}>Create</Button>
+			</Card.Footer>
+		</Card.Container>
+	</Overlay.Section>
+</Overlay.Container>

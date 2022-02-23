@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { Label, H3, Card, Button } from 'attractions';
 	import { goto } from '$app/navigation';
 	import { endActivity, startActivity, type Task } from '$lib/utils/tasks';
 
@@ -9,6 +8,7 @@
 	// import IconPencil from '~icons/mdi/pencil';
 	// import IconTrash from '~icons/mdi/trash';
 	import IconChevronRight from '~icons/mdi/chevron-right';
+	import { Tile, Button, Text, Badge } from '@kahi-ui/framework';
 	export let task: Task;
 	// $: running = task.activities.some((act) => act.done === false);
 	$: last_run = task.activities.length ? task.activities.at(-1).start : null;
@@ -29,53 +29,25 @@
 	}
 </script>
 
-<Card>
-	<div>
-		<section class="content">
-			<H3>{task.label}</H3>
-			<span class="last--run">
-				<Label small>Last Run:</Label>
-				<span>
-					{last_run
-						? new Date(last_run).toLocaleString(undefined, {
-								timeStyle: 'medium',
-								dateStyle: 'long'
-						  })
-						: 'Never'}
-				</span>
-			</span>
-		</section>
-		<section class="actions">
-			<Button round filled on:click={toggle}
-				><svelte:component this={running ? IconPause : IconPlay} /></Button
-			>
-			<Button round neutral on:click={gotoTask}><IconChevronRight /></Button>
-		</section>
-	</div>
-</Card>
+<Tile.Container palette="auto">
+	<Tile.Section>
+		<Tile.Header>{task.label}<Badge palette="accent" shape="rounded">{task.id}</Badge></Tile.Header>
+		<Text>
+			<Text is="small">
+				Last Run: {last_run
+					? new Date(last_run).toLocaleString(undefined, {
+							timeStyle: 'medium',
+							dateStyle: 'long'
+					  })
+					: 'Never'}
+			</Text>
+		</Text>
+	</Tile.Section>
 
-<style lang="scss">
-	div {
-		display: grid;
-		grid-template-columns: auto auto;
-		align-items: end;
-		justify-content: space-between;
-		gap: 1rem;
-		@media screen and (max-width: 720px) {
-			grid-template-columns: 1fr;
-		}
-		height: 100%;
-	}
-	.actions {
-		display: flex;
-		gap: 0.5rem;
-	}
-	span.last--run {
-		& > span {
-			font-size: 0.75rem;
-		}
-		display: flex;
-		gap: 0.5rem;
-		align-items: center;
-	}
-</style>
+	<Tile.Footer>
+		<Button palette="affirmative" on:click={toggle}>
+			<svelte:component this={running ? IconPause : IconPlay} />
+		</Button>
+		<Button variation="clear" palette="negative" on:click={gotoTask}>More</Button>
+	</Tile.Footer>
+</Tile.Container>

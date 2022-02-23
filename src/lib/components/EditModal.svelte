@@ -1,14 +1,14 @@
 <script lang="ts">
-	import { Button, FormField, Card, Modal, TextField } from 'attractions';
+	import { Form, TextInput, Button, Overlay, Card, Switch, NumberInput } from '@kahi-ui/framework';
 	import { tasks, selectedTask } from '$lib/stores/app';
-	export let open: boolean = false;
+	let logic_state: boolean = false;
 	let description: string;
 	let label: string;
 	let id: number;
 	let rate: number;
 	let currency: string;
 
-	$: if (open) loadData();
+	$: if (logic_state) loadData();
 
 	function loadData() {
 		label = $selectedTask?.label;
@@ -25,40 +25,38 @@
 		$selectedTask.description = description;
 		$selectedTask = $selectedTask;
 		$tasks = $tasks;
-		open = false;
+		logic_state = false;
 	}
 </script>
 
-<Modal bind:open>
-	<Card>
-		<FormField name="ID">
-			<TextField bind:value={id} disabled />
-		</FormField>
-		<FormField name="Label" required>
-			<TextField bind:value={label} />
-		</FormField>
-		{#if $selectedTask?.paid}
-			<FormField name="Hourly Rate" optional>
-				<TextField type="number" bind:value={rate} />
-			</FormField>
-			<FormField name="Currency" required>
-				<TextField bind:value={currency} />
-			</FormField>
-		{/if}
-		<FormField name="Description" optional>
-			<TextField multiline bind:value={description} />
-		</FormField>
-		<div class="actions">
-			<Button filled on:click={update}>Save</Button>
-			<Button on:click={() => (open = false)}>Cancel</Button>
-		</div>
-	</Card>
-</Modal>
+<Overlay.Container logic_id="task-edit-overlay" dismissible bind:logic_state>
+	<Overlay.Backdrop />
 
-<style lang="scss">
-	.actions {
-		justify-content: end;
-		display: flex;
-		gap: 1rem;
-	}
-</style>
+	<Overlay.Section>
+		<Card.Container palette="auto" max_width="75">
+			<Card.Header>Create Task</Card.Header>
+
+			<Card.Section>
+				<Form.Control>
+					<Form.Label>ID</Form.Label>
+					<NumberInput bind:value={id} disabled />
+					<Form.Label>Label</Form.Label>
+					<TextInput bind:value={label} required />
+					<Form.Label>Description</Form.Label>
+					<TextInput is="textarea" bind:value={description} />
+					{#if $selectedTask?.paid}
+						<Form.Label>Hourly Rate</Form.Label>
+						<NumberInput bind:value={rate} />
+						<Form.Label>Currency</Form.Label>
+						<TextInput bind:value={currency} />
+					{/if}
+				</Form.Control>
+			</Card.Section>
+
+			<Card.Footer>
+				<Overlay.Button palette="inverse" variation="clear">Cancel</Overlay.Button>
+				<Button palette="affirmative" on:click={update}>Edit</Button>
+			</Card.Footer>
+		</Card.Container>
+	</Overlay.Section>
+</Overlay.Container>

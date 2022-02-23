@@ -1,12 +1,8 @@
 <script lang="ts">
-	import { addModalOpen, tasks } from '$lib/stores/app';
+	import { tasks } from '$lib/stores/app';
 	import { exportToJsonFile } from '$lib/utils';
 	import { getId } from '$lib/utils/tasks';
-	import { Button } from 'attractions';
-
-	function add() {
-		$addModalOpen = true;
-	}
+	import { Button } from '@kahi-ui/framework';
 
 	function exportTasks() {
 		exportToJsonFile($tasks);
@@ -52,7 +48,7 @@
 </script>
 
 <nav aria-label="toolbar">
-	<Button filled on:click={add}>Create Task</Button>
+	<Button for="create-task-overlay" palette="accent">Create Task</Button>
 	<Button on:click={exportTasks}>Export All Tasks</Button>
 	<Button on:click={importTasks}>Import Tasks</Button>
 	<Button on:click={importSingleTask}>Import Single Task</Button>
@@ -61,6 +57,8 @@
 <style lang="scss">
 	nav {
 		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
 		gap: 1rem;
 	}
 </style>

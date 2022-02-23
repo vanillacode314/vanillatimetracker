@@ -1,10 +1,10 @@
 <script lang="ts">
-	import { Button, FormField, Card, Modal, TextField } from 'attractions';
+	import { Form, TextInput, Button, Overlay, Card } from '@kahi-ui/framework';
 	import { tasks, selectedActivity } from '$lib/stores/app';
-	export let open: boolean = false;
+	let logic_state: boolean = false;
 	let comment: string;
 
-	$: if (open) loadData();
+	$: if (logic_state) loadData();
 
 	function loadData() {
 		comment = $selectedActivity?.comment;
@@ -14,26 +14,28 @@
 		$selectedActivity.comment = comment;
 		$selectedActivity = $selectedActivity;
 		$tasks = $tasks;
-		open = false;
+		logic_state = false;
 	}
 </script>
 
-<Modal bind:open>
-	<Card>
-		<FormField name="Comment" optional>
-			<TextField bind:value={comment} />
-		</FormField>
-		<div class="actions">
-			<Button filled on:click={update}>Save</Button>
-			<Button on:click={() => (open = false)}>Cancel</Button>
-		</div>
-	</Card>
-</Modal>
+<Overlay.Container logic_id="comment-activity-overlay" dismissible bind:logic_state>
+	<Overlay.Backdrop />
 
-<style lang="scss">
-	.actions {
-		justify-content: end;
-		display: flex;
-		gap: 1rem;
-	}
-</style>
+	<Overlay.Section>
+		<Card.Container palette="auto" max_width="75">
+			<Card.Header>Create Task</Card.Header>
+
+			<Card.Section>
+				<Form.Control>
+					<Form.Label>Comment</Form.Label>
+					<TextInput bind:value={comment} required />
+				</Form.Control>
+			</Card.Section>
+
+			<Card.Footer>
+				<Overlay.Button palette="inverse" variation="clear">Cancel</Overlay.Button>
+				<Button palette="affirmative" on:click={update}>Save</Button>
+			</Card.Footer>
+		</Card.Container>
+	</Overlay.Section>
+</Overlay.Container>

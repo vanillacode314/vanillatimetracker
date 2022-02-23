@@ -4,17 +4,16 @@
 		style: DurationUnitFormat.styles.LONG,
 		format: '{days} {hours} {minutes} {seconds}'
 	});
-
 	import { add, exportToJsonFile, round } from '$lib/utils';
 	import { endActivity, startActivity, type Task } from '$lib/utils/tasks';
 
 	/// Components
-	import { Switch, Button, Card, Headline, Subhead, Label } from 'attractions';
+	import { Badge, Text, Spacer, Card, Button, Switch } from '@kahi-ui/framework';
 	import IconPlay from '~icons/mdi/play';
 	import IconPause from '~icons/mdi/pause';
 
 	/// State
-	import { tasks, selectedTask, editModalOpen, removeTaskModalOpen } from '$lib/stores/app';
+	import { tasks, selectedTask } from '$lib/stores/app';
 	import { tick } from 'svelte';
 	export let task: Task;
 	$: running = task.activities.some((act) => act.done === false);
@@ -29,11 +28,6 @@
 	);
 
 	/// Methods
-	async function remove() {
-		$selectedTask = task;
-		$removeTaskModalOpen = true;
-	}
-
 	function toggle() {
 		if (running) {
 			endActivity(task.activities.find((act) => act.done === false));
@@ -46,11 +40,6 @@
 		exportToJsonFile(task, `${task.id}-${task.label}`.replaceAll(' ', '-'));
 	}
 
-	function edit() {
-		$selectedTask = task;
-		$editModalOpen = true;
-	}
-
 	function onPaidChanged() {
 		tick().then(() => ($tasks = $tasks));
 		if (task.paid) {
@@ -59,55 +48,35 @@
 	}
 </script>
 
-<Card class="main--card">
-	<Switch class="paid--switch" bind:value={task.paid} on:change={onPaidChanged}>Paid</Switch>
-	<div>
-		<Headline>{task.label}</Headline>
-		<Subhead>ID: {task.id}</Subhead>
-		<Label
-			>Total Time Spent: <span class="neutral">
-				{total_time_spent}
-			</span></Label
-		>
-		{#if task.paid}
-			<Label
-				>Total Earnings: <span class="neutral">
-					{task.currency}
-					{total_earnings}
-				</span></Label
-			>
-		{/if}
-	</div>
-	<div class="task--actions">
-		<Button round filled on:click={toggle}
-			><svelte:component this={running ? IconPause : IconPlay} /></Button
-		>
-		<span class="end">
-			<Button on:click={edit}>Edit</Button>
-			<Button danger on:click={remove}>Remove</Button>
-			<Button on:click={exportTask}>Export</Button>
-		</span>
-	</div>
-</Card>
+<Card.Container class="card-preview" palette="affirmative">
+	<Card.Header>
+		{task.label}
+		<Spacer />
+		<Badge shape="pill" palette="accent">ID: {task.id}</Badge>
+	</Card.Header>
 
-<style lang="scss">
-	span.neutral {
-		color: var(--foreground-color);
-	}
-	:global(.main--card) {
-		display: grid;
-		gap: 1rem;
-		justify-items: start;
-	}
-	.task--actions {
-		display: flex;
-		gap: 1rem;
-		align-items: center;
-		justify-content: space-between;
-		width: 100%;
-	}
-	.end {
-		display: flex;
-		gap: 1rem;
-	}
-</style>
+	<Card.Section>
+		<Text>
+			{task.description}
+		</Text>
+		<Text sizing="small">
+			Total Time Spent: <strong>{total_time_spent}</strong>
+		</Text>
+		{#if task.paid}
+			<Text palette="light" sizing="small">
+				Total Earnings: <strong>{task.currency} {total_earnings}</strong>
+			</Text>
+		{:else}
+			<Text palette="negative" sizing="small">Unpaid</Text>
+		{/if}
+	</Card.Section>
+
+	<Card.Footer>
+		<Button on:click={toggle} palette="accent">{running ? 'Stop' : 'Start'}</Button>
+		<Button on:click={() => ($selectedTask = task)} for="task-edit-overlay">Edit</Button>
+		<Button palette="negative" on:click={() => ($selectedTask = task)} for="task-delete-overlay"
+			>Delete</Button
+		>
+		<Switch bind:state={task.paid} on:change={onPaidChanged} palette="accent">Paid</Switch>
+	</Card.Footer>
+</Card.Container>

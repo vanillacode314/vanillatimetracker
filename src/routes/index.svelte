@@ -3,7 +3,7 @@
 	import Toolbar from '$lib/layouts/Toolbar.svelte';
 </script>
 
-<div class="container">
+<div class="wrapper">
 	<div class="tasks">
 		<Tasks />
 	</div>
@@ -13,14 +13,13 @@
 </div>
 
 <style lang="scss">
-	.container {
+	.wrapper {
 		display: grid;
 		height: 100%;
 		grid-template-rows: 1fr auto;
 		gap: 1rem;
 	}
 	.tasks {
-		padding: 0.5rem;
 		overflow-y: auto;
 	}
 </style>

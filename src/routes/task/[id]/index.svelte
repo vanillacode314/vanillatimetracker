@@ -3,7 +3,8 @@
 	import { tasks, selectedTask } from '$lib/stores/app';
 
 	/// Components
-	import { Button, Card } from 'attractions';
+	import { Card } from 'attractions';
+	import { Button } from '@kahi-ui/framework';
 	import ActivityCard from '$lib/components/Activity.svelte';
 	import TaskDashboard from '$lib/components/TaskDashboard.svelte';
 	import IconBack from '~icons/mdi/arrow-back';
@@ -17,7 +18,7 @@
 
 <nav>
 	<a href="/">
-		<Button round filled>
+		<Button palette="accent">
 			<IconBack />
 		</Button>
 	</a>
