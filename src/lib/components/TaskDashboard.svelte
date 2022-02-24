@@ -74,6 +74,7 @@
 	<Card.Footer>
 		<Button on:click={toggle} palette="accent">{running ? 'Stop' : 'Start'}</Button>
 		<Button on:click={() => ($selectedTask = task)} for="task-edit-overlay">Edit</Button>
+		<Button on:click={exportTask}>Export</Button>
 		<Button palette="negative" on:click={() => ($selectedTask = task)} for="task-delete-overlay"
 			>Delete</Button
 		>
