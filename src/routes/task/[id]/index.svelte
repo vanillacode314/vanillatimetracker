@@ -3,7 +3,6 @@
 	import { tasks, selectedTask } from '$lib/stores/app';
 
 	/// Components
-	import { Card } from 'attractions';
 	import { Button } from '@kahi-ui/framework';
 	import ActivityCard from '$lib/components/Activity.svelte';
 	import TaskDashboard from '$lib/components/TaskDashboard.svelte';
