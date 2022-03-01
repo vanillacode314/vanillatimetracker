@@ -19,7 +19,7 @@
 
 	<Overlay.Section>
 		<Card.Container palette="auto" max_width="75">
-			<Card.Header>Create Task</Card.Header>
+			<Card.Header>Delete Task</Card.Header>
 
 			<Card.Section>
 				<Text>Are you sure want to delete this task and all of its activity logs?</Text>

@@ -23,7 +23,7 @@
 
 	<Overlay.Section>
 		<Card.Container palette="auto" max_width="75">
-			<Card.Header>Create Task</Card.Header>
+			<Card.Header>Comment Activity</Card.Header>
 
 			<Card.Section>
 				<Form.Control>

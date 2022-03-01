@@ -34,7 +34,7 @@
 
 	<Overlay.Section>
 		<Card.Container palette="auto" max_width="75">
-			<Card.Header>Create Task</Card.Header>
+			<Card.Header>Edit Task</Card.Header>
 
 			<Card.Section>
 				<Form.Control>
