@@ -29,7 +29,7 @@
 	}
 </script>
 
-<Tile.Container palette="auto">
+<Tile.Container palette="auto" on:click={gotoTask} style="cursor: pointer">
 	<Tile.Section>
 		<Tile.Header>{task.label}<Badge palette="accent" shape="rounded">{task.id}</Badge></Tile.Header>
 		<Text>
@@ -48,6 +48,6 @@
 		<Button palette="affirmative" on:click={toggle}>
 			<svelte:component this={running ? IconPause : IconPlay} />
 		</Button>
-		<Button variation="clear" palette="negative" on:click={gotoTask}>More</Button>
+		<!-- <Button variation="clear" palette="negative" on:click={gotoTask}>More</Button> -->
 	</Tile.Footer>
 </Tile.Container>
