@@ -5,7 +5,11 @@
 	import { Button } from '@kahi-ui/framework';
 
 	function exportTasks() {
-		exportToJsonFile($tasks);
+		if ($tasks?.length) {
+			exportToJsonFile($tasks);
+		} else {
+			alert('No tasks to export :(');
+		}
 	}
 
 	function importTasks() {
