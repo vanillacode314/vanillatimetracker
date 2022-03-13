@@ -22,7 +22,7 @@
 	<Overlay.Backdrop />
 
 	<Overlay.Section>
-		<Card.Container palette="auto" max_width="75">
+		<Card.Container palette="auto" width={['50', 'mobile:75']}>
 			<Card.Header>Comment Activity</Card.Header>
 
 			<Card.Section>
