@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { flip } from 'svelte/animate';
+	import { fade } from 'svelte/transition';
 	import { page } from '$app/stores';
 	import { tasks, selectedTask } from '$lib/stores/app';
 
@@ -25,8 +27,10 @@
 <div class="content">
 	<TaskDashboard {task} />
 	<div class="log">
-		{#each [...task.activities].reverse() as act}
-			<ActivityCard {act} />
+		{#each [...task.activities].reverse() as act (act.id)}
+			<div animate:flip={{ duration: 300 }} transition:fade|local>
+				<ActivityCard {act} />
+			</div>
 		{/each}
 	</div>
 </div>
