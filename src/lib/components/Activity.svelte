@@ -50,11 +50,13 @@
 
 	<Card.Footer>
 		<Button
+			is="label"
 			palette="accent"
 			on:click={() => ($selectedActivity = act)}
 			for="comment-activity-overlay">Comment</Button
 		>
 		<Button
+			is="label"
 			palette="negative"
 			for="activity-delete-overlay"
 			on:click={() => ($selectedActivity = act)}>Delete</Button

@@ -73,11 +73,19 @@
 
 	<Card.Footer>
 		<Button on:click={toggle} palette="accent">{running ? 'Stop' : 'Start'}</Button>
-		<Button on:click={() => ($selectedTask = task)} for="task-edit-overlay">Edit</Button>
-		<Button on:click={exportTask}>Export</Button>
-		<Button palette="negative" on:click={() => ($selectedTask = task)} for="task-delete-overlay"
-			>Delete</Button
+		<Button
+			is="label"
+			palette="auto"
+			on:click={() => ($selectedTask = task)}
+			for="task-edit-overlay">Edit</Button
 		>
-		<Switch bind:state={task.paid} on:change={onPaidChanged} palette="accent">Paid</Switch>
+		<Button on:click={exportTask}>Export</Button>
+		<Button
+			is="label"
+			palette="negative"
+			on:click={() => ($selectedTask = task)}
+			for="task-delete-overlay">Delete</Button
+		>
+		<Switch bind:state={task.paid} on:change={onPaidChanged} palette="auto">Paid</Switch>
 	</Card.Footer>
 </Card.Container>

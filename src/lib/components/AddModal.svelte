@@ -52,12 +52,15 @@
 					<TextInput bind:value={label} required />
 					<Form.Label>Description</Form.Label>
 					<TextInput is="textarea" bind:value={description} />
-					<Switch bind:state={paid}>Paid</Switch>
+					<Switch palette="auto" bind:state={paid}>Paid</Switch>
 					{#if paid}
-						<Form.Label>Hourly Rate</Form.Label>
-						<NumberInput bind:value={rate} />
-						<Form.Label>Currency</Form.Label>
-						<TextInput bind:value={currency} />
+						<Form.FieldSet>
+							<Form.Legend>Payment Details</Form.Legend>
+							<Form.Label>Hourly Rate</Form.Label>
+							<NumberInput bind:value={rate} />
+							<Form.Label>Currency</Form.Label>
+							<TextInput bind:value={currency} />
+						</Form.FieldSet>
 					{/if}
 				</Form.Control>
 			</Card.Section>

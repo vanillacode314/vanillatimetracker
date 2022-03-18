@@ -52,7 +52,7 @@
 </script>
 
 <nav aria-label="toolbar">
-	<Button for="create-task-overlay" palette="accent">Create Task</Button>
+	<Button is="label" for="create-task-overlay" palette="accent">Create Task</Button>
 	<Button on:click={exportTasks}>Export All Tasks</Button>
 	<Button on:click={importTasks}>Import Tasks</Button>
 	<Button on:click={importSingleTask}>Import Single Task</Button>
