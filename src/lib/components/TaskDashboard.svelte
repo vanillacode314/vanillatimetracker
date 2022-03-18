@@ -71,7 +71,7 @@
 		{/if}
 	</Card.Section>
 
-	<Card.Footer>
+	<Card.Footer style="flex-wrap: wrap">
 		<Button on:click={toggle} palette="accent">{running ? 'Stop' : 'Start'}</Button>
 		<Button
 			is="label"
