@@ -37,7 +37,7 @@
 	}
 
 	function exportTask() {
-		exportToJsonFile(task, `${task.id}-${task.label}`.replaceAll(' ', '-'));
+		exportToJsonFile(task, `${task.id}-${task.label}`.replace(/\s/g, '-'));
 	}
 
 	function onPaidChanged() {
