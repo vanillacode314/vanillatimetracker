@@ -14,7 +14,7 @@
 	$: id = $page.params.id;
 	$: task = $tasks.find((task) => task.id === +id);
 
-	$selectedTask = task;
+	$: $selectedTask = task;
 </script>
 
 <nav>

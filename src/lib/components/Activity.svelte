@@ -5,10 +5,11 @@
 		format: '{days} {hours} {minutes} {seconds}'
 	});
 	import type { Activity } from '$lib/utils/tasks';
-	import { selectedActivity, now } from '$lib/stores/app';
+	import { selectedTask, selectedActivity, now } from '$lib/stores/app';
 
 	/// Components
 	import { Card, Badge, Spacer, Button, Text } from '@kahi-ui/framework';
+	import { round } from '$lib/utils';
 
 	/// State
 	export let act: Activity;
@@ -45,6 +46,12 @@
 		<Text>From: <strong>{from_date}</strong></Text>
 		<Text>To: <strong>{to_date}</strong></Text>
 		<Text>Duration: <strong>{_duration}</strong></Text>
+		<Text>
+			Earnings: <strong
+				>{$selectedTask?.currency}
+				{round((((act.end - act.start) / 1000) * $selectedTask?.rate) / 3600, 2)}</strong
+			>
+		</Text>
 		<Text>Comment: <strong>{act.comment || 'None'}</strong></Text>
 	</Card.Section>
 
